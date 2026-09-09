@@ -204,7 +204,7 @@ function afficherTrajets() {
 
     const passengername = prompt("entre le nom de passenger ");
 
-    const tripid = Number(prompt("entre le dentifiant de trajet "));
+    const tripid = Number(prompt("entre l Identifiant de trajet "));
 
     const trip = trips.find(function(trip){
 
@@ -285,7 +285,24 @@ function Affichertickets(){
     }
 
 }
-
+function annulertickets(){
+     console.log("=== ANNULER UN TICKET ===");
+     const ticketId=Number(prompt("entre l identifiant de ticket"));
+        const ticketIndex = tickets.findIndex(function(ticket){
+            return ticket.id===ticketId ;
+        });
+        if(ticketIndex===-1){
+            console.log("ticket introuvable");
+            return ;
+        }
+        const ticket = tickets[ticketIndex];
+         const trip = trips.find(function(trip) {
+        return trip.id === ticket.tripid;
+    });
+trip.availableSeats++ ;
+tickets.splice(ticketIndex,1);
+console.log("ticket annule avec succes ");
+}
 
 
   while(true){
@@ -313,7 +330,7 @@ break ;
     Affichertickets();
 break ;
     case "4":
-    console.log(" Annuler un ticket");
+    annulertickets();
 break ;
     case "5":
     console.log(" Rechercher un ticket");
