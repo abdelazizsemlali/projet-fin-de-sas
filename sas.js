@@ -184,6 +184,7 @@ const trips = [
     }
 ];
   const tickets=[];
+
 function afficherTrajets() {
     console.log("=== TRAJETS DISPONIBLES ===");
     for (let i = 0; i < trips.length; i++) { 
@@ -303,7 +304,48 @@ trip.availableSeats++ ;
 tickets.splice(ticketIndex,1);
 console.log("ticket annule avec succes ");
 }
-
+function Rechercherticket(){
+        console.log("=== RECHERCHER UN TICKET ===");
+ const passengerName =prompt("entre le nom de passanger ");
+  const foundTickets =tickets.filter(function(ticket){
+return ticket.passengername.toLowerCase() === passengerName.toLowerCase();
+  });
+  if(foundTickets.length===0){
+    console.log("aucune ticket trouver");
+    return;
+  }
+ for(let i=0;i<foundTickets.length;i++){
+    const ticket=foundTickets[i];
+    console.log(   "Ticket #" + ticket.id +
+            " | Passager : " + ticket.passengername +
+            " | Trajet ID : " + ticket.tripid +
+            " | Place : " + ticket.seatnumber +
+            " | Prix : " + ticket.price + " DH"
+    );
+ }   
+}
+function filtrertrajets(){
+ console.log("=== FILTRER LES TRAJETS ===");
+ const departure =prompt("entre la ville de depart");
+ const filtredetrips =trips.filter(function(trip){
+ return trip.departure.toLowerCase() === departure.toUpperCase();
+     });
+   if(filtredetrips.length===0) {
+ console.log("aucune trajet trouve ");
+   return ;
+    }
+    for(let i=0;i<filtredetrips.length;i++){
+        const trip= filtredetrips[i];
+         console.log(
+            trip.id + " | " +
+            trip.departure + " → " +
+            trip.destination + " | " +
+            trip.departureTime + " - " +
+            trip.arrivalTime + " | " +
+            trip.price + " DH | " +
+            trip.availableSeats + " places" );
+    }
+}
 
   while(true){
     console.log("=================================");
@@ -333,10 +375,10 @@ break ;
     annulertickets();
 break ;
     case "5":
-    console.log(" Rechercher un ticket");
+    Rechercherticket();
 break ;    
     case "6":
-    console.log(" Filtrer les trajets");
+    filtrertrajets();
 break ;
     case "7":
     console.log(" Trier les trajets");
