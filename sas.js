@@ -269,6 +269,23 @@ function afficherTrajets() {
 
     console.log("Ticket acheté avec succès !");
 }
+function Affichertickets(){
+    console.log("=== TICKETS ===");
+    if(tickets.length===0){
+        console.log("aucune ticket acheter");
+        return;
+    }
+    for(let i=0;i<tickets.length;i++){
+        const ticket = tickets[i];
+        console.log(    "Ticket #" + ticket.id +
+            " | Passager : " + ticket.passengername +
+            " | Trajet ID : " + ticket.tripid +
+            " | Place : " + ticket.seatnumber +
+            " | Prix : " + ticket.price + " DH"  );
+    }
+
+}
+
 
 
   while(true){
