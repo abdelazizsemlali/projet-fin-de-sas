@@ -198,6 +198,79 @@ function afficherTrajets() {
         trip.availableSeats + " places");
 }
 }
+ function Acheterticket(){
+
+    console.log("=== ACHETER UN TICKET ===");
+
+    const passengername = prompt("entre le nom de passenger ");
+
+    const tripid = Number(prompt("entre le dentifiant de trajet "));
+
+    const trip = trips.find(function(trip){
+
+        return trip.id === tripid;
+
+    });
+
+    if(!trip){
+
+        console.log("trajet introuvable");
+
+        return;
+
+    }
+
+    if(trip.availableSeats <= 0){
+
+        console.log("le trajet est complete");
+
+        return;
+
+    }
+
+    const ticket = {
+
+        id: tickets.length + 1,
+        passengername: passengername,
+        tripid: trip.id,
+        seatnumber: trip.availableSeats,
+        price: trip.price,
+
+    };
+
+    tickets.push(ticket);
+
+    trip.availableSeats--;
+
+    console.log("");
+
+    console.log("Ticket #" + ticket.id);
+
+    console.log("");
+
+    console.log("Passager : " + ticket.passengername);
+
+    console.log("");
+
+    console.log(
+        "Trajet : " +
+        trip.departure +
+        " → " +
+        trip.destination
+    );
+
+    console.log("");
+
+    console.log("Place : " + ticket.seatnumber);
+
+    console.log("");
+
+    console.log("Prix : " + ticket.price + " DH");
+
+    console.log("Ticket acheté avec succès !");
+}
+
+
   while(true){
     console.log("=================================");
     console.log("      RAILWAY MANAGER");
@@ -217,10 +290,10 @@ function afficherTrajets() {
     afficherTrajets();
 break ;
     case "2" :
-    console.log(" Acheter un ticket");
+    Acheterticket();
 break ;
     case "3":
-    console.log(" Afficher les tickets");
+    Affichertickets();
 break ;
     case "4":
     console.log(" Annuler un ticket");
