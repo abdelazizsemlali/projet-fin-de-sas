@@ -184,6 +184,7 @@ const trips = [
     }
 ];
   const tickets=[];
+  let nextTicketId =1;
 
 function afficherTrajets() {
     console.log("=== TRAJETS DISPONIBLES ===");
@@ -231,43 +232,32 @@ function afficherTrajets() {
 
     const ticket = {
 
-        id: tickets.length + 1,
+        id: nextTicketId,
         passengername: passengername,
         tripid: trip.id,
-        seatnumber: trip.availableSeats,
+        seatnumber: 51-trip.availableSeats,
         price: trip.price,
 
     };
 
     tickets.push(ticket);
-
+    nextTicketId++;
     trip.availableSeats--;
-
     console.log("");
-
     console.log("Ticket #" + ticket.id);
-
     console.log("");
-
     console.log("Passager : " + ticket.passengername);
-
     console.log("");
-
     console.log(
         "Trajet : " +
         trip.departure +
         " → " +
         trip.destination
     );
-
     console.log("");
-
     console.log("Place : " + ticket.seatnumber);
-
     console.log("");
-
     console.log("Prix : " + ticket.price + " DH");
-
     console.log("Ticket acheté avec succès !");
 }
 function Affichertickets(){
@@ -326,9 +316,10 @@ return ticket.passengername.toLowerCase() === passengerName.toLowerCase();
 }
 function filtrertrajets(){
  console.log("=== FILTRER LES TRAJETS ===");
- const departure =prompt("entre la ville de depart");
+    const departure = prompt("entre la ville de depart");
+  console.log("Ville entrée : " + departure);
  const filtredetrips =trips.filter(function(trip){
- return trip.departure.toLowerCase() === departure.toUpperCase();
+ return trip.departure.toLowerCase() === departure.toLowerCase();
      });
    if(filtredetrips.length===0) {
  console.log("aucune trajet trouve ");
@@ -337,6 +328,23 @@ function filtrertrajets(){
     for(let i=0;i<filtredetrips.length;i++){
         const trip= filtredetrips[i];
          console.log(
+            trip.id + " | " +
+            trip.departure + " → " +
+            trip.destination + " | " +
+            trip.departureTime + " - " +
+            trip.arrivalTime + " | " +
+            trip.price + " DH | " +
+            trip.availableSeats + " places" );
+    }
+}
+function triertrajet(){
+    console.log("=== TRIER LES TRAJETS ===");
+    const sortedrips =trips.sort(function(a,b){
+    return a.price - b.price;
+    });
+    for(let i=0;i<sortedrips.length;i++){
+    const trip = sortedrips[i];
+    console.log(
             trip.id + " | " +
             trip.departure + " → " +
             trip.destination + " | " +
@@ -381,7 +389,7 @@ break ;
     filtrertrajets();
 break ;
     case "7":
-    console.log(" Trier les trajets");
+    triertrajet();
 break ;
     case "0":
     console.log("the programme is finiche");
@@ -390,4 +398,4 @@ default:
      console.log("le choix est invalide ");
    }
   }
-
+ 
